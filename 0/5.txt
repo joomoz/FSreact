@@ -1,0 +1,26 @@
+kayttaja->selain:
+note left of selain
+kayttaja kirjottaa osoiteriville
+fullstack-exampleapp.herokuapp.com/spa
+end note
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/spa
+palvelin->selain: status 200, sivun HTML-koodi
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/main.css
+palvelin->selain: status 200, main.css - tyylitiedotsto
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/spa.js
+palvelin->selain: status 200, spa.js - javascript -tiedosto
+
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/data.json
+note right of selain
+spa.js hakee datan osoitteesta 
+fullstack-exampleapp.herokuapp.com/data.json
+end note
+palvelin->selain: status 200, data.json
+
+note left of selain
+ selain näyttää palvelimen palauttaman HTML:n
+ johon on upotettu palvelimelta haettu data
+end note

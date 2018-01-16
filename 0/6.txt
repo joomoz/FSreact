@@ -1,0 +1,21 @@
+kayttaja->selain:
+note left of selain
+kayttaja kirjottaa lomakkeeseen uuden muistiinpanon ja painaa Talleta nappia.
+end note
+selain->palvelin: POST fullstack-exampleapp.herokuapp.com/new_note_spa
+note left of palvelin
+Selain lähettää lomakkeelle syötetyn datan palvelimelle JSON:na,
+johon kuuluu sekä sisältö (content), että aikaleima (date)
+end note
+palvelin->selain: status 201
+
+note right of selain
+Statuskoodi 201, Created. 
+Selain pysyy samalla sivulla ja muita HTTP-pyyntöjä ei suoriteta.
+end note
+
+note left of selain
+ Selain ei lataa sivua uudelleen, vaan js-tiedostossa 
+ olevan määrittelyn mukaan sivulla oleva muistiinpanojen lista päivitetään.
+ Lisäksi POST:iin tullut vastaus lokitetaan konsoliin.
+end note

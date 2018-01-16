@@ -1,0 +1,17 @@
+kayttaja->selain:
+note left of selain
+kayttaja kirjottaa lomakkeeseen uuden muistiinpanon ja painaa Talleta nappia.
+end note
+selain->palvelin: POST fullstack-exampleapp.herokuapp.com/new_note
+note left of palvelin
+Selain lähettää lomakkeelle syötetyn datan palvelimelle.
+end note
+palvelin->selain: status 302, Location: /notes
+
+note right of selain
+302 uudelleenohjaa selaimen osoitteeseen /notes
+end note
+
+note left of selain
+ Selain lataa uudelleen muistiinpanojen sivun.
+end note
