@@ -43,10 +43,27 @@ class App extends React.Component {
           <p>hyvä: {this.state.hyva}</p>
           <p>neutraali: {this.state.neutraali}</p>
           <p>huono: {this.state.huono}</p>
+          <Statsit 
+            hyva={this.state.hyva}
+            neutraali={this.state.neutraali}
+            huono={this.state.huono}
+          />
         </div>
       </div>
     )
   }
+}
+
+
+const Statsit = ({hyva, neutraali, huono}) => {
+  const ka = (hyva - huono) / (hyva + neutraali + huono)
+  const positiivisia = hyva / (hyva + neutraali + huono)
+  return (
+    <div>
+      <p>keskiarvo: {((isNaN(ka)) ? 0 : ka).toFixed(1)}</p>
+      <p>positiivisia: {((isNaN(positiivisia)) ? 0 : positiivisia*100).toFixed(1)} %</p>
+    </div>
+  )
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
