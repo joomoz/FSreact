@@ -38,12 +38,12 @@ const Otsikko = (props) => {
   )
 }
 
-const Sisalto = (props) => {
+const Sisalto = (p) => {
   return (
     <div>
-      <Osa osa={props.osat[0]}/>  
-      <Osa osa={props.osat[1]}/>  
-      <Osa osa={props.osat[2]}/>   
+      <Osa osa={p.osat[0]}/>  
+      <Osa osa={p.osat[1]}/>  
+      <Osa osa={p.osat[2]}/>   
     </div>
   )
 }
