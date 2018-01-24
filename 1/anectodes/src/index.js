@@ -10,21 +10,26 @@ class App extends React.Component {
   }
 
   randomAnectode = () => {
-    this.setState({selected: Math.random(anecdotes.length - 1)})
+    return () => {
+      this.setState({selected: Math.floor((Math.random() * anecdotes.length))})
+    }
   }
 
   render() {
     return (
       <div>
-        {this.props.anecdotes[this.state.selected]}
+        <h4>{this.props.anecdotes[this.state.selected]}</h4>
+        <Button handleClick={this.randomAnectode()} />
       </div>
     )
   }
 }
 
-const Button = () => {
+const Button = ({handleClick}) => {
   return (
-    <button>Give me moooar!</button>
+    <button onClick={handleClick}>
+      Give me moooar!
+    </button>
   )
 }
 
