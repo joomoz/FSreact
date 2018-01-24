@@ -65,15 +65,22 @@ const Button = ({ handleClick, text }) => {
 const Statistics = ({hyva, neutraali, huono}) => {
   const ka = (hyva - huono) / (hyva + neutraali + huono)
   const positiivisia = hyva / (hyva + neutraali + huono)
-  return (
-    <div>
-      <Statistic desc="hyvä" value={hyva} />
-      <Statistic desc="neutraali" value={neutraali} />
-      <Statistic desc="huono" value={huono} />
-      <Statistic desc="keskiarvo" value={((isNaN(ka)) ? 0 : ka).toFixed(1)} />
-      <Statistic desc="positiivisia" value={((isNaN(positiivisia)) ? 0 : positiivisia*100).toFixed(1)} desc2="%"/>
-    </div>
-  )
+  
+  if(hyva == 0 && huono == 0 && neutraali == 0) {
+    return ( 
+      <p>ei palautteita</p>
+    )
+  } else {
+    return ( 
+      <div>
+        <Statistic desc="hyvä" value={hyva} />
+        <Statistic desc="neutraali" value={neutraali} />
+        <Statistic desc="huono" value={huono} />
+        <Statistic desc="keskiarvo" value={((isNaN(ka)) ? 0 : ka).toFixed(1)} />
+        <Statistic desc="positiivisia" value={((isNaN(positiivisia)) ? 0 : positiivisia*100).toFixed(1)} desc2="%"/>
+      </div>
+    )
+  }
 }
 
 const Statistic = ({desc, value, desc2}) => {
