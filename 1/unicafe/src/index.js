@@ -43,7 +43,7 @@ class App extends React.Component {
           <p>hyvä: {this.state.hyva}</p>
           <p>neutraali: {this.state.neutraali}</p>
           <p>huono: {this.state.huono}</p>
-          <Statsit 
+          <Statistics 
             hyva={this.state.hyva}
             neutraali={this.state.neutraali}
             huono={this.state.huono}
@@ -55,7 +55,7 @@ class App extends React.Component {
 }
 
 
-const Statsit = ({hyva, neutraali, huono}) => {
+const Statistics = ({hyva, neutraali, huono}) => {
   const ka = (hyva - huono) / (hyva + neutraali + huono)
   const positiivisia = hyva / (hyva + neutraali + huono)
   return (
