@@ -66,22 +66,26 @@ const Statistics = ({hyva, neutraali, huono}) => {
     )
   } else {
     return ( 
-      <div>
-        <Statistic desc="hyvä" value={hyva} />
-        <Statistic desc="neutraali" value={neutraali} />
-        <Statistic desc="huono" value={huono} />
-        <Statistic desc="keskiarvo" value={((isNaN(ka)) ? 0 : ka).toFixed(1)} />
-        <Statistic desc="positiivisia" value={((isNaN(positiivisia)) ? 0 : positiivisia*100).toFixed(1)} desc2="%"/>
-      </div>
+      <table>
+        <tbody>
+          <Statistic desc="hyvä" value={hyva} />     
+          <Statistic desc="neutraali" value={neutraali} />
+          <Statistic desc="huono" value={huono} />
+          <Statistic desc="keskiarvo" value={((isNaN(ka)) ? 0 : ka).toFixed(1)} />
+          <Statistic desc="positiivisia" value={((isNaN(positiivisia)) ? 0 : positiivisia*100).toFixed(1)} desc2="%"/>
+        </tbody>
+      </table>
     )
   }
 }
 
 const Statistic = ({desc, value, desc2}) => {
   return (
-    <div>
-      <p>{desc}: {value} {desc2}</p>
-    </div>
+    <tr>
+      <td>{desc}</td> 
+      <td>{value}</td> 
+      <td>{desc2}</td>
+    </tr> 
   )
 }
 
