@@ -11,16 +11,10 @@ class App extends React.Component {
     }
   }
 
-  annaHyvaPalaute = () => {
-    this.setState({ hyva: this.state.hyva + 1 })
-  }
-
-  annaNeutraaliPalaute = () => {
-    this.setState({ neutraali: this.state.neutraali + 1 })
-  }
-
-  annaHuonoPalaute = () => {
-    this.setState({ huono: this.state.huono + 1 })
+  annaPalaute = (valinta) => {
+    return () => {
+      this.setState({ [valinta]: this.state[valinta] +1 })
+    }
   }
 
   render() {
@@ -29,15 +23,15 @@ class App extends React.Component {
         <div><h2>anna palautetta</h2></div>
         <div>
           <Button
-            handleClick={this.annaHyvaPalaute}
+            handleClick={this.annaPalaute("hyva")}
             text="hyvä"
           />
           <Button
-            handleClick={this.annaNeutraaliPalaute}
+            handleClick={this.annaPalaute("neutraali")}
             text="neutraali"
           />
           <Button
-            handleClick={this.annaHuonoPalaute}
+            handleClick={this.annaPalaute("huono")}
             text="huono"
           />
         </div>
@@ -66,7 +60,7 @@ const Statistics = ({hyva, neutraali, huono}) => {
   const ka = (hyva - huono) / (hyva + neutraali + huono)
   const positiivisia = hyva / (hyva + neutraali + huono)
   
-  if(hyva == 0 && huono == 0 && neutraali == 0) {
+  if(hyva === 0 && huono === 0 && neutraali === 0) {
     return ( 
       <p>ei palautteita</p>
     )
