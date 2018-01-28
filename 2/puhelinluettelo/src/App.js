@@ -1,13 +1,11 @@
 import React from 'react';
+import Person from './components/Person'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      persons: [
-        { name: 'Arto Hellas',
-          number: 123456 }
-      ],
+      persons: props.persons,
       newName: '',
       newNumber: ''
     }
@@ -66,10 +64,8 @@ class App extends React.Component {
         <h2>Numerot</h2>
         <ul>
           {this.state.persons.map( person => 
-            <li key={person.name}> 
-              {person.name} {person.number}
-            </li>)
-          }
+            <Person key={person.name} person={person} />
+          )}
         </ul>
       </div>
     )
