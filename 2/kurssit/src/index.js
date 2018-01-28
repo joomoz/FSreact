@@ -69,6 +69,7 @@ const Osa = ({osa}) => {
 }
 
 const Yhteensa = ({osat}) => {
+  //reduce!
   let total = osat.reduce((sum, osa) => {
     return sum + osa.tehtavia
   }, 0);
