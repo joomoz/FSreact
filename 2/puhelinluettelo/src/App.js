@@ -8,7 +8,9 @@ class App extends React.Component {
     this.state = {
       persons: [],
       newName: '',
-      newNumber: ''
+      newNumber: '',
+      error: null,
+      info: null
     }
   }
 
@@ -46,12 +48,15 @@ class App extends React.Component {
             this.setState({
               persons: response,
               newName: '',
-              newNumber: ''
+              newNumber: '',
+              info: `${this.state.newName} lisättiin puhelinluetteloon.`
             })
-          })
+            setTimeout(() => {
+              this.setState({info: null})
+            }, 3000)
+          })   
       })
     }    
-
   }
 
   handleNameChange = (event) => {
@@ -77,9 +82,20 @@ class App extends React.Component {
           this.setState({
             persons: persons
           })
+          this.setState({
+            info: `${person.name} poistettiin puhelinluettelosta.`,
+          })
+          setTimeout(() => {
+            this.setState({info: null})
+          }, 3000)
         })
         .catch(error => {
-          alert(`Henkilöä ei löydy palvelimelta`)
+          this.setState({
+            info: `Henkilöä ei löydy palvelimelta`,
+          })
+          setTimeout(() => {
+            this.setState({info: null})
+          }, 3000)
         })    
       }
     }
@@ -89,6 +105,7 @@ class App extends React.Component {
     return (
       <div>
         <h2>Puhelinluettelo</h2>
+        <Notification message={this.state.info}/>
         <form onSubmit={this.addName}>
           <div>
             nimi: <input value={this.state.newName} onChange={this.handleNameChange}/>
@@ -113,6 +130,17 @@ class App extends React.Component {
       </div>
     )
   }
+}
+
+const Notification = ({ message }) => {
+  if (message === null) {
+    return null
+  }
+  return (
+    <div className="error">
+      {message}
+    </div>
+  )
 }
 
 export default App;
