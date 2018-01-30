@@ -40,11 +40,15 @@ class App extends React.Component {
       personService
       .create(nameObject)
       .then(newName => {
-        this.setState({
-          persons: this.state.persons.concat(nameObject),
-          newName: '',
-          newNumber: ''
-        })
+        personService
+          .getAll()
+          .then(response => {
+            this.setState({
+              persons: response,
+              newName: '',
+              newNumber: ''
+            })
+          })
       })
     }    
 
@@ -58,6 +62,27 @@ class App extends React.Component {
   handleNumberChange = (event) => {
     console.log(event.target.value)
     this.setState({ newNumber: event.target.value })
+  }
+
+  handleDelete = (id) => {
+    console.log("deleteee")
+    return () => {
+      const person = this.state.persons.find(n => n.id === id)
+      if(window.confirm(`Poistetaanko ${person.name}?`)) {
+  
+        personService
+        .deleteId(id)
+        .then(() => {
+          const persons = this.state.persons.filter(n => n.id !== id)
+          this.setState({
+            persons: persons
+          })
+        })
+        .catch(error => {
+          alert(`Henkilöä ei löydy palvelimelta`)
+        })    
+      }
+    }
   }
 
   render() {
@@ -74,11 +99,17 @@ class App extends React.Component {
           <button type="submit">lisää</button>
         </form>
         <h2>Numerot</h2>
-        <ul>
-          {this.state.persons.map( person => 
-            <Person key={person.name} person={person} />
-          )}
-        </ul>
+        <table>
+          <tbody>
+              {this.state.persons.map( person => 
+                <Person 
+                  key={person.name} 
+                  person={person} 
+                  handleDelete={this.handleDelete(person.id)}
+                />
+              )}
+          </tbody>
+        </table>
       </div>
     )
   }
