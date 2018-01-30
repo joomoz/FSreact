@@ -1,14 +1,23 @@
 import React from 'react';
 import Person from './components/Person'
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      persons: props.persons,
+      persons: [],
       newName: '',
       newNumber: ''
     }
+  }
+
+  componentWillMount() {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        this.setState({ persons: response.data })
+      })
   }
 
   addName = (event) => {
