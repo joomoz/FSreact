@@ -70,7 +70,6 @@ class App extends React.Component {
   }
 
   handleDelete = (id) => {
-    console.log("deleteee")
     return () => {
       const person = this.state.persons.find(n => n.id === id)
       if(window.confirm(`Poistetaanko ${person.name}?`)) {
