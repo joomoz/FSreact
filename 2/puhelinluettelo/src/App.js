@@ -1,5 +1,5 @@
 import React from 'react';
-import Person from './components/Person'
+import Persons from './components/Persons'
 import personService from './services/persons'
 
 class App extends React.Component {
@@ -69,41 +69,41 @@ class App extends React.Component {
     this.setState({ newNumber: event.target.value })
   }
 
-  handleDelete = (id) => {
-    return () => {
-      const person = this.state.persons.find(n => n.id === id)
-      if(window.confirm(`Poistetaanko ${person.name}?`)) {
-  
-        personService
-        .deleteId(id)
-        .then(() => {
-          const persons = this.state.persons.filter(n => n.id !== id)
-          this.setState({
-            persons: persons
-          })
-          this.setState({
-            info: `${person.name} poistettiin puhelinluettelosta.`,
-          })
-          setTimeout(() => {
-            this.setState({info: null})
-          }, 3000)
+  removePerson = (id) => () => {
+    console.log("id: ", id)
+    const person = this.state.persons.find(n => n.id === id)
+
+    if(window.confirm(`Poistetaanko ${person.name}?`)) {
+      personService
+      .deleteId(id)
+      .then(() => {
+        const persons = this.state.persons.filter(n => n.id !== id)
+        this.setState({
+          persons: persons
         })
-        .catch(error => {
-          this.setState({
-            info: `Henkilöä ei löydy palvelimelta`,
-          })
-          setTimeout(() => {
-            this.setState({info: null})
-          }, 3000)
-        })    
-      }
+        this.setState({
+          info: `${person.name} poistettiin puhelinluettelosta.`,
+        })
+        setTimeout(() => {
+          this.setState({info: null})
+        }, 3000)
+      })
+      .catch(error => {
+        this.setState({
+          info: `Henkilöä ei löydy palvelimelta`,
+        })
+        setTimeout(() => {
+          this.setState({info: null})
+        }, 3000)
+      })    
     }
+    
   }
 
   render() {
     return (
       <div>
-        <h2>Puhelinluettelo</h2>
+        <h2>Puhelinluettelo!</h2>
         <Notification message={this.state.info}/>
         <form onSubmit={this.addName}>
           <div>
@@ -114,18 +114,10 @@ class App extends React.Component {
           </div>
           <button type="submit">lisää</button>
         </form>
-        <h2>Numerot</h2>
-        <table>
-          <tbody>
-              {this.state.persons.map( person => 
-                <Person 
-                  key={person.name} 
-                  person={person} 
-                  handleDelete={this.handleDelete(person.id)}
-                />
-              )}
-          </tbody>
-        </table>
+        <Persons 
+          persons={this.state.persons} 
+          removePerson={this.removePerson}
+        />
       </div>
     )
   }
