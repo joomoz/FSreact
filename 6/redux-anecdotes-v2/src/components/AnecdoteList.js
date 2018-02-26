@@ -1,15 +1,19 @@
 import React from 'react'
 import { voteAnectode } from './../reducers/anecdoteReducer'
+import { showNotification, removeNotification } from './../reducers/notificationReducer'
 
 class AnecdoteList extends React.Component {
-  handleVote = (anectode) => {
-    this.props.store.dispatch(voteAnectode(anectode))
+  handleVote = (anecdote) => {
+    this.props.store.dispatch(voteAnectode(anecdote))
+    this.props.store.dispatch(showNotification(`anecdote '${anecdote.content}' voted`))
+    setTimeout(() => {
+      this.props.store.dispatch(removeNotification())
+    }, 5000)
   }
 
   render() {
-    const store = this.props.store.getState()
-    console.log(store.anecdotes)
-    const anecdotes = store.anecdotes
+    const anecdotes = this.props.store.getState().anecdotes
+
     return (
       <div>
         <h2>Anecdotes</h2>

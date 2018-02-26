@@ -1,5 +1,6 @@
 import React from 'react'
 import { anectodeCreation } from './../reducers/anecdoteReducer'
+import { showNotification, removeNotification } from './../reducers/notificationReducer'
 
 class AnecdoteForm extends React.Component {
   handleSubmit = (e) => {
@@ -8,6 +9,10 @@ class AnecdoteForm extends React.Component {
     this.props.store.dispatch(anectodeCreation(content))
 
     e.target.anecdote.value = ''
+    this.props.store.dispatch(showNotification(`anectode '${content}' added`))
+    setTimeout(() => {
+      this.props.store.dispatch(removeNotification())
+    }, 5000)
   }
   render() {
     return (
