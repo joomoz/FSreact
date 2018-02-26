@@ -23,7 +23,7 @@ const reducer = (store = initialState, action) => {
   if (action.type==='VOTE') {
     const old = store.filter(a => a.id !== action.id)
     const voted = store.find(a => a.id === action.id)
-    console.log('voted: ', voted)
+    // console.log('voted: ', voted.content)
 
     return [...old, { ...voted, votes: voted.votes + 1 } ]
   }
