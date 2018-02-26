@@ -1,4 +1,4 @@
-const notificationReducer = (state = '!?', action) => {
+const notificationReducer = (state = 'Everything is ok?!', action) => {
   console.log(action)
   switch (action.type) {
     case 'NOTIFICATION':

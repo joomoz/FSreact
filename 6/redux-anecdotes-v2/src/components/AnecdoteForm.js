@@ -9,7 +9,7 @@ class AnecdoteForm extends React.Component {
     this.props.store.dispatch(anectodeCreation(content))
 
     e.target.anecdote.value = ''
-    this.props.store.dispatch(showNotification(`anectode '${content}' added`))
+    this.props.store.dispatch(showNotification(`anecdote '${content}' added`))
     setTimeout(() => {
       this.props.store.dispatch(removeNotification())
     }, 5000)
