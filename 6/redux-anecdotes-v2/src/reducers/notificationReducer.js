@@ -1,5 +1,5 @@
 const notificationReducer = (state = 'Everything is ok?!', action) => {
-  console.log(action)
+  // console.log(action)
   switch (action.type) {
     case 'NOTIFICATION':
       return action.notification
