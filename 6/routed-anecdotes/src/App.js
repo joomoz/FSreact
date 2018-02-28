@@ -1,15 +1,29 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 
 const Menu = () => (
   <div>    
-    <div>
-      <Link to="/">anecdotes</Link> &nbsp;
-      <Link to="/create">create new</Link> &nbsp;
-      <Link to="/about">about</Link>
+    <div style={menuStyle}>
+      <NavLink exact to="/" activeStyle={activeMenuStyle}>anecdotes</NavLink> &nbsp;
+      <NavLink exact to="/create" activeStyle={activeMenuStyle}>create new</NavLink> &nbsp;
+      <NavLink exact to="/about" activeStyle={activeMenuStyle}>about</NavLink>
     </div>
   </div>
 )
+
+const menuStyle = { 
+  margin: 10,
+  padding: 10,
+  color: 'blue',
+  backgroundColor: 'lightgrey'
+}
+
+const activeMenuStyle = {
+  margin: 10,
+  padding: 15,
+  color: 'lightgrey',
+  backgroundColor: 'blue'
+}
 
 const AnecdoteList = ({ anecdotes }) => (
   <div>
@@ -17,7 +31,7 @@ const AnecdoteList = ({ anecdotes }) => (
     <ul>
       {anecdotes.map(anecdote =>
         <li key={anecdote.id} >
-          <Link to={`/anecdotes/${anecdote.id}`}>{anecdote.content} </Link>
+          <NavLink to={`/anecdotes/${anecdote.id}`}>{anecdote.content} </NavLink>
         </li>)}
     </ul>  
   </div>
@@ -53,9 +67,18 @@ const Footer = () => (
   </div>
 )
 
+const notificationStyle = { 
+  borderStyle: 'dotted dashed dotted dashed',
+  margin: 10,
+  padding: 5,
+  color: 'blue',
+  fontStyle: 'oblique',
+  fontSize: 16 
+}
+
 const Notification = ({ notification }) => (
   <div>
-    <p>{notification}</p> 
+    <p style={notificationStyle}>{notification}</p> 
   </div>
 )
 
