@@ -1,4 +1,4 @@
-const notificationReducer = (state = 'Everything is ok?!', action) => {
+const notificationReducer = (state = '', action) => {
   // console.log(action)
   switch (action.type) {
     case 'NOTIFICATION':
@@ -8,17 +8,19 @@ const notificationReducer = (state = 'Everything is ok?!', action) => {
   }
 }
 
-export const showNotification = (message) => {
-  return {
-    type: 'NOTIFICATION',
-    notification: message
-  }
-}
+export const notify = (message, seconds) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'NOTIFICATION',
+      notification: message
+    })
 
-export const removeNotification = () => {
-  return {
-    type: 'NOTIFICATION',
-    notification: ''
+    setTimeout(() => {
+      dispatch({
+        type: 'NOTIFICATION',
+        notification: ''
+      })
+    }, seconds * 1000)
   }
 }
 
